@@ -32,7 +32,7 @@ const observation_t *env_start(){
 
 	angle = get_angle();
 	angleVel = get_angleVelocity();
-	angleVel += 50;
+	angleVel += 3;
 	vel = get_velocity();
 	vel += 50;
 
@@ -58,13 +58,13 @@ const reward_observation_terminal_t *env_step(const action_t *this_action){
 	angle = get_angle();
 	//angle += 90;
 	angleVel = get_angleVelocity();
-	angleVel += 50;
+	angleVel += 3;
 	vel = get_velocity();
 	vel += 50;
 	
 	the_reward = calculate_reward(angle, angleVel, vel);
 	terminal = check_terminal(angle, angleVel, vel);
-//	printf("angle:%lf,angleVel:%lf,vel:%lf,force:%d,terminal:%d\n",angle,angleVel,vel,force,terminal);
+
 	this_reward_observation.observation->doubleArray[0] = angle;
 	this_reward_observation.observation->doubleArray[1] = angleVel;
 	this_reward_observation.observation->doubleArray[2] = vel;
@@ -84,18 +84,20 @@ const char* env_message(const char* inMessage){
 }
 
 int calculate_reward(double angle, double angleVel, double vel){
-    if((int)angle<=100 &&(int)angle>=80 && (int)angleVel==50 && (int)vel<=53 && (int)vel>=47){
-    //	printf("angle:%lf,angleVel:%lf,vel:%lf,, %d\n",angle,angleVel,vel,suc);
+    if((int)angle<=94 && (int)angle>=86 && (int)angleVel==3 && (int)vel==50){
         return 100;
     }
     return 0;
 }
   
 int check_terminal(double angle, double angleVel, double vel){
-    if((int)angle<=100 &&(int)angle>=80 && (int)angleVel==50 && (int)vel<=53 && (int)vel>=47){
+	//printf("check terminal angle : %lf, angleVel : %lf, vel : %lf\n",angle, angleVel, vel);
+    if((int)angle<=94 && (int)angle>=86 && (int)angleVel==3 && (int)vel==50){
+        printf("success angle : %lf\n",angle);
         return 1;
     }
-    if((int)angle<=10 || (int)angle>=170){
+    if((int)angle<=20 || (int)angle>=160){
+    	printf("fail angle : %lf\n",angle);
     	return 1;
     }
     return 0;

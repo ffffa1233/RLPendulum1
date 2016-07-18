@@ -68,28 +68,28 @@ void offline_demo(){
 	int j=0;
 
 	evaluation_point_t *this_score=0;
-	evaluation_point_t *statistics[41];
+	evaluation_point_t *statistics[51];
 
 	/* 학습 전 결과값 출력 */
 	this_score = evaluate_agent();
 	print_score(0,this_score);
 	statistics[0]=this_score;
 
-	for(i=0;i<40;i++){
+	for(i=0;i<50;i++){
 		/* j번 학습 */
-		for(j=0;j<10000;j++){
+		for(j=0;j<1000;j++){
 			RL_episode(0);
 		}
 
 		/* 학습 후 결과값 출력 */
 		this_score = evaluate_agent();
-		print_score((i+1)*10000,this_score);
+		print_score((i+1)*1000,this_score);
 
 		statistics[i+1]=this_score;
 	}
 	save_result_csv(statistics,"result.csv");
 
-	for(i=0;i<41;i++){
+	for(i=0;i<51;i++){
 		free(statistics[i]);
 	}
 }
@@ -105,7 +105,7 @@ evaluation_point_t *evaluate_agent(){
 	double this_return = 0;
 	double mean;
 	double variance;
-	int n = 250;
+	int n = 100;
 	evaluation_point_t *eval_point = 0;
 
 	RL_agent_message("freeze learning");

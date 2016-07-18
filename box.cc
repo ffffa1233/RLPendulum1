@@ -16,8 +16,8 @@ int positionIterations = 2;
 
 /* Box2D 초기화 */
 void box_init(){
-	double randomAngle = (rand()%160) + 10;
-
+	double randomAngle = (rand()%100)+40;
+printf("start angle : %lf\t",randomAngle);
 	world = new b2World(gravity, true);
 
 	b2BodyDef myBodyDef;
@@ -28,7 +28,7 @@ void box_init(){
 
 	b2FixtureDef rectangleFixtureDef;
 	rectangleFixtureDef.shape = &rectangleShape;
-	rectangleFixtureDef.density = 3;
+	rectangleFixtureDef.density = 1;
 
 	myBodyDef.position.Set(0, 14);
 	verticalBody = world->CreateBody(&myBodyDef);
@@ -97,9 +97,10 @@ double get_angleVelocity(){
 
 /* bodies에 force값 만큼 힘을 가합니다. */
 void apply_force(int force){
+	//printf("apply force : %d\n",force);
 	world->Step(timeStep, velocityIterations, positionIterations);
 
-	horizonBody->ApplyForce(b2Vec2(force*100-5*100, 0), horizonBody->GetWorldCenter() );
+	horizonBody->ApplyForce(b2Vec2(force*5000-50*5000, 0), horizonBody->GetWorldCenter() );
 }
 
 /* Box2D 해제  */

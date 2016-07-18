@@ -9,7 +9,7 @@ action_t last_action;
 observation_t *last_observation = 0;
 
 double* value_function=0;
-double sarsa_stepsize = 0.1;
+double sarsa_stepsize = 0.9;
 double sarsa_epsilon = 0.5;
 double sarsa_gamma = 0.5;
 
@@ -36,9 +36,9 @@ void agent_init(const char* task_spec){
 
 	last_observation=allocateRLStructPointer(0,3,0);
 
-	numActions = 11; // -5 ~ 5
+	numActions = 101; // -50 ~ 50
 	numAngles = 181*extends; // -90 ~ 90
-	numAngleVelocity = 101*extends; // -50 ~ 50
+	numAngleVelocity = 7*extends; // -3 ~ 3
 	numVelocity = 101*extends; // -50 ~ 50
 
 	srand(time(0));
