@@ -16,8 +16,8 @@ int positionIterations = 2;
 
 /* Box2D 초기화 */
 void box_init(){
-	double randomAngle = (rand()%100)+40;
-printf("start angle : %lf\t",randomAngle);
+	double randomAngle = (rand()%40)+70;
+//printf("start angle : %lf\t",randomAngle);
 	world = new b2World(gravity, true);
 
 	b2BodyDef myBodyDef;

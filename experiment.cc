@@ -77,13 +77,13 @@ void offline_demo(){
 
 	for(i=0;i<50;i++){
 		/* j번 학습 */
-		for(j=0;j<1000;j++){
+		for(j=0;j<500;j++){
 			RL_episode(0);
 		}
 
 		/* 학습 후 결과값 출력 */
 		this_score = evaluate_agent();
-		print_score((i+1)*1000,this_score);
+		print_score((i+1)*500,this_score);
 
 		statistics[i+1]=this_score;
 	}
